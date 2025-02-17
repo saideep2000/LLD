@@ -6,24 +6,27 @@
 # Global Access – Provides a way to access that instance.
 # Controlled Instantiation – Prevents multiple object creation.
 
+
 class Singleton:
-    _instance = None  # Private class attribute
+    __instance = None
 
-    # This runs 
     def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(Singleton, cls).__new__(cls)
-        return cls._instance
+        if cls.__instance is None:
+            cls.__instance = super(Singleton, cls).__new__(cls)
+        return cls.__instance
 
-# Testing Singleton
 obj1 = Singleton()
 obj2 = Singleton()
 
-print(obj1 is obj2)  # Output: True (Both are same instance)
+print(obj1 is obj2) # Output: True (Both are same instance)
+
+
 
 # cls is a class-level parameter that refers to the class itself when working with class methods or __new__()
 
 # super(Singleton, cls).__new__(cls) calls object.__new__(cls), which allocates memory for a new instance.
+
+# Here the parent for any class is object, so if you call super at an object you will get the object.
     
 # _instance stores this single instance so that future calls return the same object.
 

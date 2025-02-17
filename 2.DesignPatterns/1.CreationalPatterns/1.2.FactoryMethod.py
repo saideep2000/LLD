@@ -6,56 +6,57 @@
 # Follows Open-Closed Principle → Easy to extend without modifying existing code.
 # Abstracts Complex Object Creation → Useful when initialization is complex.
 
-# Let's implement a factory method for creating different types of vehicles.
-
-
-
 from abc import ABC, abstractmethod
 
-# Step 1: Define the Product Interface (Abstract Class)
-class Vehicle(ABC):
+# This is abstract class and other will extends this.
+class NotificationSystem(ABC):
     @abstractmethod
-    def create(self):
+    def send(self, message):
         pass
 
-# Step 2: Create Concrete Products
-class Car(Vehicle):
-    def create(self):
-        return "Car is created"
 
-class Bike(Vehicle):
-    def create(self):
-        return "Bike is created"
+class email(NotificationSystem):
+    def send(self, message):
+        print(f"Sending {message} through the email notification")
+    
+class sms(NotificationSystem):
+    def send(self, message):
+        print(f"Sending {message} through the sms notification")
 
-# Step 3: Define the Creator (Factory) Interface
-class VehicleFactory(ABC):
+class push(NotificationSystem):
+    def send(self, message):
+        print(f"Sending {message} through the push notification")
+
+class NotificationFactory(ABC):
     @abstractmethod
-    def create_vehicle(self):
+    def MakeNotification(self):
         pass
 
-# Step 4: Implement Concrete Factories
-class CarFactory(VehicleFactory):
-    def create_vehicle(self):
-        return Car()
+class EmailFactory(NotificationFactory):
+    def MakeNotification(self):
+        return email()
 
-class BikeFactory(VehicleFactory):
-    def create_vehicle(self):
-        return Bike()
+class SmsFactory(NotificationFactory):
+    def MakeNotification(self):
+        return sms()
 
-# Step 5: Using the Factory Method
-def client_code(factory: VehicleFactory):
-    vehicle = factory.create_vehicle()
-    print(vehicle.create())
+class PushFactory(NotificationFactory):
+    def MakeNotification(self):
+        return push()
 
-# Test Factory Method
-car_factory = CarFactory()
-bike_factory = BikeFactory()
 
-client_code(car_factory)  # Output: Car is created
-client_code(bike_factory)  # Output: Bike is created
+# client
+def send_notification(factory : NotificationFactory, message : str):
+    now = factory.MakeNotification()
+    now.send(message)
+
+send_notification(EmailFactory(), "hi email")
+send_notification(SmsFactory(), "hi sms")
+send_notification(PushFactory(), "hi push")
 
 # Here the client doesn't know how exactly the object is created.
 
+# even if the new notification type comes, client will just have to use the new factory but other than that nothing will change.
 
 # When to use:
 # When object creation logic is complex.
