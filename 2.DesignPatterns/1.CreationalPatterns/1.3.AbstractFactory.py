@@ -82,6 +82,27 @@
 
 
 
+
+
+# ### **Abstract Factory Pattern - Question**  
+
+# In a software system, notifications need to be sent through multiple channels such as **Email, SMS, and Push Notifications**.  
+# Each notification type has a different implementation for sending messages and storing logs, but the core operations remain the same.  
+
+# To maintain **scalability** and **loose coupling**, the system should not depend on concrete implementations of notification types.  
+# Instead, it should dynamically create the required notification object at runtime without modifying the existing client code.  
+
+# #### **Requirements:**  
+# 1. Define a common interface for all notification types to enforce the structure.  
+# 2. Implement the **Abstract Factory Pattern** to create notification objects dynamically.  
+# 3. Ensure that adding a new notification type does not require modifying the existing client code.  
+
+# #### **Implement the Abstract Factory Pattern**  
+# Provide the necessary **abstract classes, concrete implementations, and a client function** that utilizes the factories to 
+# send notifications and store logs efficiently.
+
+
+
 from abc import ABC, abstractmethod
 
 # Step 1: Abstract Product Interface

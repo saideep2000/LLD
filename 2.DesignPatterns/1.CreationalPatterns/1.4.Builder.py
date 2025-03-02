@@ -7,45 +7,61 @@
 # When you want to make the object immutable (constructed step by step but final after creation).
 # When you need better code readability instead of long constructor calls.
 
-# Step 1: Define the Product (Complex Object)
+# Builder Pattern - Question
+# In a software system, customers need a way to build and configure cars dynamically based on their preferences.
+# Each car has different configurable attributes, such as engine type, color, sunroof, and autopilot.
+
+# To maintain scalability and flexibility, the system should use the Builder Pattern to allow step-by-step car construction while keeping the client code clean and avoiding long constructor parameter lists.
+
+
+from abc import ABC, abstractmethod
+
+# Step 1: Car Class (Product)
 class Car:
     def __init__(self):
-        self.model = None
+        self.type = None
         self.engine = None
         self.color = None
         self.sunroof = False
         self.autopilot = False
 
     def __str__(self):
-        return f"Car: {self.model}, Engine: {self.engine}, Color: {self.color}, Sunroof: {self.sunroof}, Autopilot: {self.autopilot}"
+        return (f"Car: {self.type}, Engine: {self.engine}, Color: {self.color}, "
+                f"Sunroof: {self.sunroof}, Autopilot: {self.autopilot}")
 
-# Step 2: Define the Abstract Builder Interface
-class CarBuilder:
-    def set_model(self, model):
+# Step 2: Abstract Builder
+class CarBuilder(ABC):
+    @abstractmethod
+    def set_type(self, car_type):
         pass
 
+    @abstractmethod
     def set_engine(self, engine):
         pass
 
+    @abstractmethod
     def set_color(self, color):
         pass
 
-    def add_sunroof(self):
+    @abstractmethod
+    def set_sunroof(self, sunroof):
         pass
 
-    def add_autopilot(self):
+    @abstractmethod
+    def set_autopilot(self, autopilot):
         pass
 
+    @abstractmethod
     def build(self):
         pass
 
-# Step 3: Implement the Concrete Builder
-class ConcreteCarBuilder(CarBuilder):
+# Step 3: Concrete Builder
+class CarBuilderBase(CarBuilder):
     def __init__(self):
         self.car = Car()
 
-    def set_model(self, model):
-        self.car.model = model
+    def set_type(self, car_type):
+        self.car.type = car_type
         return self
 
     def set_engine(self, engine):
@@ -56,47 +72,55 @@ class ConcreteCarBuilder(CarBuilder):
         self.car.color = color
         return self
 
-    def add_sunroof(self):
-        self.car.sunroof = True
+    def set_sunroof(self, sunroof):
+        self.car.sunroof = sunroof
         return self
 
-    def add_autopilot(self):
-        self.car.autopilot = True
+    def set_autopilot(self, autopilot):
+        self.car.autopilot = autopilot
         return self
 
     def build(self):
-        return self.car  # Returns the final Car object
+        return self.car
 
-# Step 4: Director (Optional - Manages Construction)
+# Step 4: Director Class
 class CarDirector:
-    def __init__(self, builder):
+    def __init__(self, builder: CarBuilderBase):
         self.builder = builder
 
     def build_sports_car(self):
         return (self.builder
-                .set_model("Sports Car")
-                .set_engine("V8 Turbo")
-                .set_color("Red")
-                .add_sunroof()
-                .add_autopilot()
+                .set_type("Sports Car")
+                .set_engine("V8")
+                .set_color("White")
+                .set_sunroof(True)
+                .set_autopilot(True)
                 .build())
 
     def build_economy_car(self):
         return (self.builder
-                .set_model("Economy Car")
+                .set_type("Economy Car")
                 .set_engine("Electric")
                 .set_color("Blue")
+                .set_sunroof(False)
+                .set_autopilot(False)
                 .build())
 
-# Step 5: Using the Builder Pattern
-builder = ConcreteCarBuilder()
-director = CarDirector(builder)
+# Step 5: Client Code
+if __name__ == "__main__":
+    # Building a Sports Car
+    sports_car_builder = CarBuilderBase()
+    sports_car_director = CarDirector(sports_car_builder)
+    sports_car = sports_car_director.build_sports_car()
+    
+    # Building an Economy Car
+    economy_car_builder = CarBuilderBase()
+    economy_car_director = CarDirector(economy_car_builder)
+    economy_car = economy_car_director.build_economy_car()
 
-sports_car = director.build_sports_car()
-economy_car = director.build_economy_car()
+    print(sports_car)  # Display the Sports Car
+    print(economy_car)  # Display the Economy Car
 
-print(sports_car)  # Output: Car: Sports Car, Engine: V8 Turbo, Color: Red, Sunroof: True, Autopilot: True
-print(economy_car)  # Output: Car: Economy Car, Engine: Electric, Color: Blue, Sunroof: False, Autopilot: False
 
 
 # Here if you want an optional features then you should remove the director.

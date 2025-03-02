@@ -5,6 +5,21 @@
 # Increases Flexibility → Can create different objects dynamically.
 # Follows Open-Closed Principle → Easy to extend without modifying existing code.
 # Abstracts Complex Object Creation → Useful when initialization is complex.
+ 
+
+# ### **Question:**  
+# In a software system, notifications need to be sent through multiple channels such as **Email, SMS, and Push Notifications**. 
+# Each notification type has a different implementation for sending messages, but the core operation remains the same: delivering a message.  
+
+# To maintain **scalability** and **loose coupling**, the system should not depend on concrete implementations of notification types. 
+# Instead, it should dynamically create the required notification object at runtime without modifying the existing client code.  
+
+# How would you design a system that:  
+# 1. Defines a common interface for all notification types.  
+# 2. Uses a factory method to create objects for different notification types dynamically.  
+# 3. Ensures that adding a new notification type does not require modifying the existing client code.  
+
+# Implement the **Factory Design Pattern** to achieve this. Provide the necessary abstract classes, concrete implementations, and a client function that utilizes the factories to send notifications.
 
 from abc import ABC, abstractmethod
 

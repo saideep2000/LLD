@@ -6,6 +6,13 @@
 # Global Access – Provides a way to access that instance.
 # Controlled Instantiation – Prevents multiple object creation.
 
+# Singleton Pattern - Question
+# In a software system, certain classes must have only one instance throughout the entire application.
+# For example, classes like Database Connection, Configuration Manager, and Logging System should follow 
+# the Singleton Pattern to prevent multiple instances from being created.
+
+# To maintain global access and ensure only one instance exists, implement the Singleton Pattern where a 
+# class restricts the instantiation of itself to a single object.
 
 class Singleton:
     __instance = None
