@@ -103,70 +103,116 @@
 
 
 
+# from abc import ABC, abstractmethod
+
+# # Step 1: Abstract Product Interface
+# class System(ABC):
+#     @abstractmethod
+#     def SendNotification(self, message: str):
+#         pass
+
+#     @abstractmethod
+#     def Store(self, message: str):
+#         pass
+
+# # Step 2: Concrete Product Implementations
+# class EmailNotification(System):
+#     def SendNotification(self, message: str):
+#         print(f"I'm an Email. Please email me at {message}")
+
+#     def Store(self, message: str):
+#         print(f"This is getting stored in the log pages of email at {message}")
+
+# class SmsNotification(System):
+#     def SendNotification(self, message: str):
+#         print(f"I'm an SMS. Please text me at {message}")
+
+#     def Store(self, message: str):
+#         print(f"This is getting stored in the log pages of SMS at {message}")
+
+# class PushNotification(System):
+#     def SendNotification(self, message: str):
+#         print(f"I'm a Push Notification. Please check me at {message}")
+
+#     def Store(self, message: str):
+#         print(f"This is getting stored in the log pages of push notifications at {message}")
+
+# # Step 3: Abstract Factory Interface
+# class SystemFactory(ABC):
+#     @abstractmethod
+#     def MakeNotification(self) -> System:
+#         pass
+
+# # Step 4: Concrete Factories
+# class EmailNotificationFactory(SystemFactory):
+#     def MakeNotification(self):
+#         return EmailNotification()
+    
+# class SmsNotificationFactory(SystemFactory):
+#     def MakeNotification(self):
+#         return SmsNotification()
+    
+# class PushNotificationFactory(SystemFactory):
+#     def MakeNotification(self):
+#         return PushNotification()
+
+# # Step 5: Client Code
+# def hit(factory: SystemFactory, message: str):
+#     now = factory.MakeNotification()
+#     now.SendNotification(message)
+#     now.Store(message)
+
+# # Step 6: Testing the Abstract Factory Pattern
+# hit(EmailNotificationFactory(), "Hi, this is an email")
+# hit(SmsNotificationFactory(), "Hi, this is an SMS")
+# hit(PushNotificationFactory(), "Hi, this is a push notification")
+
+# Example 2:
+
 from abc import ABC, abstractmethod
+from typing import Type
 
-# Step 1: Abstract Product Interface
-class System(ABC):
-    @abstractmethod
-    def SendNotification(self, message: str):
-        pass
-
-    @abstractmethod
-    def Store(self, message: str):
-        pass
-
-# Step 2: Concrete Product Implementations
-class EmailNotification(System):
-    def SendNotification(self, message: str):
-        print(f"I'm an Email. Please email me at {message}")
-
-    def Store(self, message: str):
-        print(f"This is getting stored in the log pages of email at {message}")
-
-class SmsNotification(System):
-    def SendNotification(self, message: str):
-        print(f"I'm an SMS. Please text me at {message}")
-
-    def Store(self, message: str):
-        print(f"This is getting stored in the log pages of SMS at {message}")
-
-class PushNotification(System):
-    def SendNotification(self, message: str):
-        print(f"I'm a Push Notification. Please check me at {message}")
-
-    def Store(self, message: str):
-        print(f"This is getting stored in the log pages of push notifications at {message}")
-
-# Step 3: Abstract Factory Interface
-class SystemFactory(ABC):
-    @abstractmethod
-    def MakeNotification(self) -> System:
-        pass
-
-# Step 4: Concrete Factories
-class EmailNotificationFactory(SystemFactory):
-    def MakeNotification(self):
-        return EmailNotification()
+# let's create the abstract class of pet
+class Pet(ABC):
+    def __init__(self, name : str):
+        self.name = name
     
-class SmsNotificationFactory(SystemFactory):
-    def MakeNotification(self):
-        return SmsNotification()
+    @abstractmethod
+    def speak(self):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+# Dog class which will inhert the Pet
+class Dog(Pet):
+    def speak(self):
+        print(f"Bow Bow...")
     
-class PushNotificationFactory(SystemFactory):
-    def MakeNotification(self):
-        return PushNotification()
+    def __str__(self):
+        return f"Hi I'm a Dog and my name is {self.name}"
 
-# Step 5: Client Code
-def hit(factory: SystemFactory, message: str):
-    now = factory.MakeNotification()
-    now.SendNotification(message)
-    now.Store(message)
+# Cat class which will inhert the Pet
+class Cat(Pet):
+    def speak(self):
+        print(f"Muew Muew...")
+    
+    def __str__(self):
+        return f"Hi I'm a Cat and my name is {self.name}"
+        
+class PetShop():
+    def __init__(self, animal_factory : Type[Pet]):
+        self.pet_factory = animal_factory
+    def buy_pet(self, name) -> Pet:
+        return self.pet_factory(name)
 
-# Step 6: Testing the Abstract Factory Pattern
-hit(EmailNotificationFactory(), "Hi, this is an email")
-hit(SmsNotificationFactory(), "Hi, this is an SMS")
-hit(PushNotificationFactory(), "Hi, this is a push notification")
+# client code
 
+pet_shop = PetShop(Dog)
+my_dog_pet_shop = pet_shop.buy_pet("Juli")
+print(my_dog_pet_shop)
+my_dog_pet_shop.speak()
 
 
 # Use the Abstract Factory Pattern when: 
@@ -174,5 +220,7 @@ hit(PushNotificationFactory(), "Hi, this is a push notification")
 # You want to ensure compatibility between created objects.
 # You want to decouple the client from specific classes.
 # You need a scalable, extensible solution that follows Open-Closed Principle.
+
+# Here the concrete factory will provide the actually logic to create products.
 
 # python3 2.DesignPatterns/1.CreationalPatterns/1.3.AbstractFactory.py

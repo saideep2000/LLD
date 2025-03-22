@@ -73,6 +73,11 @@ send_notification(PushFactory(), "hi push")
 
 # even if the new notification type comes, client will just have to use the new factory but other than that nothing will change.
 
+# The client calls a method (often called create_product or similar) on a base class, 
+# and the concrete subclass decides which specific class to instantiate. 
+# This reduces tight coupling between the client code and the concrete classes.
+
+
 # When to use:
 # When object creation logic is complex.
 # When you need different types of objects based on conditions.
