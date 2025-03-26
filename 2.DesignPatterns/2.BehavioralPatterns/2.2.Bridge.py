@@ -122,3 +122,6 @@ if __name__ == '__main__':
 # platforms (e.g., WindowsPlatform, LinuxPlatform). The Scheduler abstraction holds a 
 # reference to a Platform instance and delegates platform-specific scheduling, which 
 # significantly reduces class explosion and improves flexibility.
+
+
+# python3 2.DesignPatterns/2.BehavioralPatterns/2.2.Bridge.py
