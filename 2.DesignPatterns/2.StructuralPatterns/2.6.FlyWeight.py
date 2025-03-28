@@ -68,4 +68,4 @@ if __name__ == "__main__":
     print(f"Total flyweight objects created: {len(CharacterFactory._characters)}")
 
 
-# python3 2.DesignPatterns/2.BehavioralPatterns/2.6.FlyWeight.py
+# python3 2.DesignPatterns/2.StructuralPatterns/2.6.FlyWeight.py

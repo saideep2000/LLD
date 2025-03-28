@@ -87,4 +87,4 @@ if __name__ == "__main__":
 # No need to rewrite legacy code, making integration smooth.
 
 
-# python3 2.DesignPatterns/2.BehavioralPatterns/2.1.Adapter.py
+# python3 2.DesignPatterns/2.StructuralPatterns/2.1.Adapter.py

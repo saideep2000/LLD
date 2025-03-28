@@ -74,4 +74,4 @@ if __name__ == '__main__':
 # Consequently, Composite and Decorator are often used in concert.
 
 
-# python3 2.DesignPatterns/2.BehavioralPatterns/2.3.Composite.py
+# python3 2.DesignPatterns/2.StructuralPatterns/2.3.Composite.py

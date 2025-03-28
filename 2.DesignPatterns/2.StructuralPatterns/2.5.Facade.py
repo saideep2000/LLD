@@ -85,4 +85,4 @@ if __name__ == "__main__":
     home_theater.end_movie()
 
 
-# python3 2.DesignPatterns/2.BehavioralPatterns/2.5.Facade.py
+# python3 2.DesignPatterns/2.StructuralPatterns/2.5.Facade.py

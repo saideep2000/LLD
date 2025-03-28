@@ -71,4 +71,4 @@ if __name__ == '__main__':
     decorated_window.draw()
 
 
-# python3 2.DesignPatterns/2.BehavioralPatterns/2.4.Decorator.py
+# python3 2.DesignPatterns/2.StructuralPatterns/2.4.Decorator.py
