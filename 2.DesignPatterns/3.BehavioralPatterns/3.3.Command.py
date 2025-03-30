@@ -84,4 +84,11 @@ if __name__ == "__main__":
     remote_control.press_button()  # Output: Light is OFF.
 
 
+# The Command pattern is flexible because it transforms method calls into objects. 
+# This transformation enables you to manage, extend, and manipulate operations in ways 
+# that wouldn’t be possible if the client directly invoked methods on the receiver. 
+# The benefits of queuing, undo/redo, macro commands, logging, and dynamic behavior 
+# adjustment all stem from this fundamental encapsulation of a request as an object.
+
+
 # python3 2.DesignPatterns/3.BehavioralPatterns/3.3.Command.py
