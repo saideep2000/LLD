@@ -1,0 +1,18 @@
+https://www.lldcoding.com/lld-problems-sheet
+https://github.com/ashishps1/awesome-low-level-design/blob/main/problems/parking-lot.md
+
+Study common LLD problems:
+
+Parking Lot Design
+Library Management System
+Online Booking System
+Elevator System
+Chess/Board Game
+
+
+
+Prepare to discuss:
+
+Trade-offs between different design choices
+How to make your code maintainable and extensible
+How to handle edge cases and failure scenarios
