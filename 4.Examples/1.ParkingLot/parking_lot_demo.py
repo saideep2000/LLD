@@ -1,9 +1,11 @@
 from parking_lot import ParkingLot
-from vehicle import Vehicle
-from car import Car
-from truck import Truck
-from motorcycle import Motorcycle
+from vehicle_type import VehicleType
+# from vehicle import Vehicle
+# from car import Car
+# from truck import Truck
+# from motorcycle import Motorcycle
 from level import Level
+from vehicle_factory import Vehiclefactory
 
 class ParkingLotDemo:
     def run():
@@ -11,9 +13,17 @@ class ParkingLotDemo:
         parking_lot.add_level(Level(1,3))
         parking_lot.add_level(Level(2,3))
 
-        car = Car("ABC123")
-        truck = Truck("XYZ789")
-        motorcycle = Motorcycle("M1234")
+
+        # before the factory design pattern
+        # car = Car("ABC123")
+        # truck = Truck("XYZ789")
+        # motorcycle = Motorcycle("M1234")
+
+        # after factory design pattern
+        car = Vehiclefactory.create_vehicle(VehicleType.CAR, "ABC123")
+        truck = Vehiclefactory.create_vehicle(VehicleType.TRUCK, "XYZ789")
+        motorcycle = Vehiclefactory.create_vehicle(VehicleType.MOTORCYCLE, "M1234")
+
 
         # Park vehicles
         print(parking_lot.park_vehicle(car))

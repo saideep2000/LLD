@@ -1,3 +1,29 @@
+SOLID:
+
+Single Responsibility Principle (SRP):
+- A class should have only one reason to change. It should have only one resposibility.
+- Don't add logics or any stuff that doesn't belong to that or else you gonna have to change this class
+if that logic changes.
+
+Open/Closed Principle (OCP):
+- Classes shouldbe open for extension and closed for modifictaions. 
+You should be able to add new beahviour without changing the exisitng code.
+- You’re extending behavior by creating new classes or overriding methods, not modifying the existing classes.
+
+Liskov Substitution Principle(LSP):
+- Subclasses should be substitutable for their parent classes without breaking the program.
+- if someone is expecting a Vehicle, any kind of vehicle should behave as expected, without introducing special rules that break the base logic.
+
+Interface Segregation Principle (ISP):
+- A class should not be forced to implement interfaces it does not use. Prefer small, specific interfaces over large, bloated ones.
+
+
+Dependency Inversion Principle (DIP):
+- High-level modules should not depend on low-level modules. Both should depend on abstractions.
+- 
+
+
+
 https://www.lldcoding.com/lld-problems-sheet
 https://github.com/ashishps1/awesome-low-level-design/blob/main/problems/parking-lot.md
 
@@ -16,3 +42,31 @@ Prepare to discuss:
 Trade-offs between different design choices
 How to make your code maintainable and extensible
 How to handle edge cases and failure scenarios
+
+Expected Questions:
+
+If there is a change (like this) how many files you should change?
+What are your entities and member variables?
+Would the user/player be able to use/access the game board?
+
+Some Answers :
+
+I considered making separte subclasses as we can write the abstract class and the subclasses 
+can have different implementation of (something) and this might be overkill for a small system,
+but as the things evolve this could come handy.
+
+SpotType, VehicleType : We can have a enum for these. For small addition we can map new things here
+by adding them in the enum. It also align how the real world might configure spot sizes in data, 
+rather than code.
+
+The trade-off is that conditionals can be less OOP-polymorphic. If we had a lot more variation or 
+complex behavior per type, subclassing might be more appropriate to adhere to the Open/Closed 
+principle (where adding a new vehicle type wouldn't require changing logic, just adding a class). 
+In our simple scenario, either approach works. I went with simpler enums for clarity and time.
+
+The parking lot might have multiple entry gates. We would likely have some synchronization to 
+prevent race conditions. We need to ensure that two threads don't both see the spot as free and 
+assign it. This means our data structures (like the counts and spot availability) should be managed 
+in a thread-safe way. lock a particular level while checking it, or even lock specific spot entries 
+when updating.
+
